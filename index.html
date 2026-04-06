@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantify - Premium Measurement Converter</title>
+    <meta name="description" content="Professional quantity measurement and conversion application with history and arithmetic operations.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="blob-bg"></div>
+    <div class="blob-bg blob-2"></div>
+    <div class="blob-bg blob-3"></div>
+
+    <header>
+        <nav>
+            <div class="logo">
+                <i class="fas fa-microchip"></i>
+                <span>Quantify</span>
+            </div>
+            <div class="nav-links" id="navLinks">
+                <a href="#convert" class="active">Convert</a>
+                <a href="#compare">Compare</a>
+                <a href="#arithmetic">Arithmetic</a>
+                <a href="#history">History</a>
+            </div>
+            <div class="auth-section" id="authSection">
+                <button id="loginBtn" class="btn-outline">Login</button>
+                <button id="registerBtn" class="btn-primary">Sign Up</button>
+                <div id="userInfo" class="user-info hidden">
+                    <span id="userEmail"></span>
+                    <button id="logoutBtn" class="btn-icon"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Auth Modals -->
+        <div id="authModal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <div id="loginForm" class="auth-form">
+                    <h2>Welcome Back</h2>
+                    <p>Enter your credentials to access your measurements.</p>
+                    <div class="input-group">
+                        <label for="loginEmail">Email</label>
+                        <input type="email" id="loginEmail" placeholder="name@example.com">
+                    </div>
+                    <div class="input-group">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" placeholder="••••••••">
+                    </div>
+                    <button id="doLogin" class="btn-primary full-width">Login</button>
+                    <p class="switch-form">Don't have an account? <a href="#" id="showRegister">Sign up</a></p>
+                </div>
+                <div id="registerForm" class="auth-form hidden">
+                    <h2>Create Account</h2>
+                    <p>Join Quantify to start managing your measurements.</p>
+                    <div class="input-group">
+                        <label for="regEmail">Email</label>
+                        <input type="email" id="regEmail" placeholder="name@example.com">
+                    </div>
+                    <div class="input-group">
+                        <label for="regPassword">Password</label>
+                        <input type="password" id="regPassword" placeholder="••••••••">
+                    </div>
+                    <div class="input-group">
+                        <label for="regPhone">Phone Number</label>
+                        <input type="tel" id="regPhone" placeholder="+1 (555) 000-0000">
+                    </div>
+                    <button id="doRegister" class="btn-primary full-width">Sign Up</button>
+                    <p class="switch-form">Already have an account? <a href="#" id="showLogin">Login</a></p>
+                </div>
+            </div>
+        </div>
+
+        <section id="converterSection" class="active-section">
+            <div class="container glass">
+                <div class="section-badge">Fast & Accurate</div>
+                <h1>Convert Anything</h1>
+                <p class="subtitle">Seamlessly switch between length, weight, volume, and more.</p>
+
+                <div class="measurement-type-selector">
+                    <button class="type-btn active" data-type="Length"><i class="fas fa-ruler"></i> Length</button>
+                    <button class="type-btn" data-type="Weight"><i class="fas fa-weight-hanging"></i> Weight</button>
+                    <button class="type-btn" data-type="Volume"><i class="fas fa-flask"></i> Volume</button>
+                    <button class="type-btn" data-type="Temperature"><i class="fas fa-thermometer-half"></i> Temperature</button>
+                    <button class="type-btn" data-type="Area"><i class="fas fa-vector-square"></i> Area</button>
+                    <button class="type-btn" data-type="Time"><i class="fas fa-clock"></i> Time</button>
+                </div>
+
+                <div class="converter-box" id="convert">
+                    <div class="input-panel">
+                        <div class="field">
+                            <label>From</label>
+                            <input type="number" id="sourceValue" value="1" placeholder="0.00">
+                            <select id="sourceUnit"></select>
+                        </div>
+                        <div class="swap-icon">
+                            <i class="fas fa-exchange-alt"></i>
+                        </div>
+                        <div class="field">
+                            <label>To</label>
+                            <div class="result-display" id="targetValueDisplay">0.00</div>
+                            <select id="targetUnit"></select>
+                        </div>
+                    </div>
+                    <button id="convertBtn" class="btn-primary large">Convert Now</button>
+                </div>
+
+                <div class="converter-box hidden" id="compare">
+                    <div class="compare-panel">
+                        <div class="field">
+                            <label>Quantity 1</label>
+                            <div class="inline-fields">
+                                <input type="number" id="compareVal1" value="1">
+                                <select id="compareUnit1"></select>
+                            </div>
+                        </div>
+                        <div class="compare-divider">vs</div>
+                        <div class="field">
+                            <label>Quantity 2</label>
+                            <div class="inline-fields">
+                                <input type="number" id="compareVal2" value="12">
+                                <select id="compareUnit2"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <button id="compareBtn" class="btn-primary large">Compare</button>
+                    <div id="compareResult" class="result-box hidden"></div>
+                </div>
+
+                <div class="converter-box hidden" id="arithmetic">
+                    <div class="arithmetic-panel">
+                        <div class="field">
+                            <label>Quantity 1</label>
+                            <div class="inline-fields">
+                                <input type="number" id="arithVal1" value="1">
+                                <select id="arithUnit1"></select>
+                            </div>
+                        </div>
+                        <div class="operation-selector">
+                            <button class="op-btn active" data-op="add"><i class="fas fa-plus"></i></button>
+                            <button class="op-btn" data-op="subtract"><i class="fas fa-minus"></i></button>
+                        </div>
+                        <div class="field">
+                            <label>Quantity 2</label>
+                            <div class="inline-fields">
+                                <input type="number" id="arithVal2" value="1">
+                                <select id="arithUnit2"></select>
+                            </div>
+                        </div>
+                        <div class="target-field">
+                            <label>Result In</label>
+                            <select id="arithTargetUnit"></select>
+                        </div>
+                    </div>
+                    <button id="arithBtn" class="btn-primary large">Calculate</button>
+                    <div id="arithResult" class="result-box hidden"></div>
+                </div>
+
+                <div class="converter-box hidden" id="history">
+                    <div class="history-header">
+                        <h2>Calculation History</h2>
+                        <button id="refreshHistory" class="btn-icon"><i class="fas fa-sync"></i></button>
+                    </div>
+                    <div class="history-list" id="historyList">
+                        <!-- History items will be injected here -->
+                        <div class="empty-state">
+                            <i class="fas fa-history"></i>
+                            <p>No history yet. Start converting!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="unauthorizedSection" class="hidden">
+            <div class="container glass text-center">
+                <i class="fas fa-lock-open lock-icon"></i>
+                <h2>Access Protected</h2>
+                <p>Please login or create an account to use the measurement tools and view history.</p>
+                <button class="btn-primary" onclick="app.showAuthModal('login')">Login to Continue</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Quantify. All rights reserved.</p>
+    </footer>
+
+    <div id="toast" class="toast"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
