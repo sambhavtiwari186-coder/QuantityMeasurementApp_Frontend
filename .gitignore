@@ -2,3 +2,6 @@ node_modules
 node_modules/
 dist/
 bin/
+node_modules/
+bin/
+dist/

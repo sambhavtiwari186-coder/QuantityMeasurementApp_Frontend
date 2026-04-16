@@ -7,7 +7,7 @@ import { AuthService } from './auth.service';
   providedIn: 'root'
 })
 export class MeasurementService {
-  private apiUrl = 'http://localhost:5000/api/measurement';
+  private apiUrl = 'https://quantitymeasurmentapp-qyyx.onrender.com/api/measurement';
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 

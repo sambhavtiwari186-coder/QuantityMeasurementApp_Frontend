@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:5000/api/auth'; // Assuming backend runs on 5000
+  private apiUrl = 'https://quantitymeasurmentapp-qyyx.onrender.com/api/auth';
 
   constructor(private http: HttpClient, private router: Router) {}
 
