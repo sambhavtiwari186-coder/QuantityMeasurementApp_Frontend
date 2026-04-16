@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MeasurementService {
-  private apiUrl = 'https://quantitymeasurmentapp-qyyx.onrender.com/api/measurement';
+  private apiUrl = `${environment.apiUrl}/measurement`;
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 

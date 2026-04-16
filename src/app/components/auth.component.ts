@@ -389,6 +389,10 @@ export class AuthComponent implements OnInit {
   }
 
   private parseError(err: any): string {
+    if (err?.status === 0) {
+      return 'Cannot connect to the backend server. Please check if the backend is awake (Render cold start) or if CORS is blocking the request.';
+    }
+
     const error = err?.error;
     if (!error) {
       return err?.message || 'Unknown error occurred.';
