@@ -49,7 +49,7 @@ import { AuthService } from '../services/auth.service';
             <div class="tab-slider" [style.transform]="isLoginMode ? 'translateX(0)' : 'translateX(100%)'"></div>
           </div>
 
-          <div class="form-body" [@if]="isLoginMode">
+          <div class="form-body">
             <div class="form-header">
               <h2 class="form-title">{{ isLoginMode ? 'Welcome back' : 'Create account' }}</h2>
               <p class="form-subtitle">{{ isLoginMode ? 'Sign in to your workspace' : 'Get started for free today' }}</p>
