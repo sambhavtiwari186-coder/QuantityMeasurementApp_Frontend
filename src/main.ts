@@ -26,12 +26,17 @@ const routes: Routes = [
     router.navigate(['/login']);
     return false;
   }] },
-  { path: '', redirectTo: 'login', pathMatch: 'full' }
+  { path: 'index.html', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '**', redirectTo: 'login' }
 ];
+
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 bootstrapApplication(AppComponent, {
   providers: [
     provideHttpClient(),
-    provideRouter(routes)
+    provideRouter(routes),
+    provideAnimations()
   ]
 }).catch(err => console.error(err));
