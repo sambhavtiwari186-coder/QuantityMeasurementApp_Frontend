@@ -26,7 +26,6 @@ const routes: Routes = [
     router.navigate(['/login']);
     return false;
   }] },
-  { path: 'index.html', redirectTo: 'login', pathMatch: 'full' },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: '**', redirectTo: 'login' }
 ];
