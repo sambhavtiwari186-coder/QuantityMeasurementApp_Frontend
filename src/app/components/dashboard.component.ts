@@ -246,8 +246,8 @@ import { AuthService } from '../services/auth.service';
                 <tr>
                   <th>#</th>
                   <th>Type</th>
-                  <th>Source</th>
-                  <th>Target</th>
+                  <th>First Operand</th>
+                  <th>Second Operand</th>
                   <th>Result</th>
                   <th>When</th>
                 </tr>
@@ -256,9 +256,9 @@ import { AuthService } from '../services/auth.service';
                 <tr *ngFor="let h of history; let i = index">
                   <td class="row-num">{{ i + 1 }}</td>
                   <td><span class="type-badge">{{ h.operationType }}</span></td>
-                  <td>{{ h.sourceValue }} <span class="unit-tag">{{ h.sourceUnit }}</span></td>
-                  <td><span class="unit-tag">{{ h.targetUnit }}</span></td>
-                  <td class="result-cell">{{ h.resultValue }}</td>
+                  <td>{{ h.firstOperand }}</td>
+                  <td>{{ h.secondOperand === 'N/A' ? '–' : h.secondOperand }}</td>
+                  <td class="result-cell">{{ h.finalResult }}</td>
                   <td class="date-cell">{{ h.timestamp | date:'MMM d, h:mm a' }}</td>
                 </tr>
               </tbody>
