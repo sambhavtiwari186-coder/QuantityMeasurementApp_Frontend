@@ -240,6 +240,8 @@ import { AuthService } from '../services/auth.service';
             </button>
           </div>
 
+          <div class="error-box" style="margin-bottom:1rem" *ngIf="historyError">⚠️ {{ historyError }}</div>
+
           <div class="glass-card p-0 overflow-hidden history-table-card" *ngIf="history.length > 0">
             <table class="history-table">
               <thead>
@@ -265,7 +267,7 @@ import { AuthService } from '../services/auth.service';
             </table>
           </div>
 
-          <div class="empty-state" *ngIf="history.length === 0 && !loadingHistory">
+          <div class="empty-state" *ngIf="history.length === 0 && !loadingHistory && !historyError">
             <div class="empty-icon">📭</div>
             <div class="empty-title">No history yet</div>
             <div class="empty-sub">Your conversion & operation history will appear here.</div>
@@ -642,6 +644,7 @@ export class DashboardComponent implements OnInit {
   // History
   history: any[] = [];
   loadingHistory = false;
+  historyError = '';
 
   quickUnits = ['INCH', 'FEET', 'CM', 'KG', 'GRAM', 'LITRE'];
   
@@ -767,9 +770,13 @@ export class DashboardComponent implements OnInit {
 
   loadHistory() {
     this.loadingHistory = true;
+    this.historyError = '';
     this.measurementService.getHistory().subscribe({
       next: res => { this.history = res; this.loadingHistory = false; },
-      error: () => { this.loadingHistory = false; }
+      error: err => { 
+        this.loadingHistory = false;
+        this.historyError = this.parseError(err) || 'Could not load history.';
+      }
     });
   }
 
